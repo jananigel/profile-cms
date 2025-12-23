@@ -1,0 +1,55 @@
+import { Loader2 } from 'lucide-react';
+
+import type { MouseEventHandler } from 'react';
+
+interface TextButtonProps {
+	label: string;
+	size?: 'auto' | 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+	btnType?: 'submit' | 'reset' | 'button';
+	btnStyle?: 'primary' | 'secondary';
+	callback?: MouseEventHandler<HTMLButtonElement>;
+	isDisabled?: boolean;
+	isLoading?: boolean;
+}
+const TextButton = ({
+	label,
+	callback,
+	size = 'full',
+	btnType = 'button',
+	btnStyle = 'primary',
+	isDisabled: isDisabled = false,
+	isLoading = false,
+}: TextButtonProps) => {
+	const btnSizeMap = {
+		full: 'w-full',
+	} as const;
+
+	const getBtnSize = (): string => {
+		return btnSizeMap[size as keyof typeof btnSizeMap] || size;
+	};
+
+	const stylesMap = {
+		primary: 'bg-blue-600 text-white font-bold hover:bg-blue-700',
+		secondary: 'bg-white text-blue-600 border border-blue-600 hover:bg-blue-700 hover:text-white',
+	} as const;
+
+	const getBtnStyle = (): string => {
+		return stylesMap[btnStyle as keyof typeof stylesMap] || btnStyle;
+	};
+
+	const computedDisabled = isDisabled || isLoading;
+
+	return (
+		<button
+			type={btnType}
+			onClick={callback}
+			disabled={computedDisabled}
+			aria-disabled={computedDisabled}
+			aria-busy={isLoading}
+			className={`${getBtnSize()} ${getBtnStyle()} flex justify-center py-3 rounded-xl transition-colors shadow-lg shadow-blue-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60`}>
+			{isLoading ? <Loader2 className="animate-spin"></Loader2> : label}
+		</button>
+	);
+};
+
+export default TextButton;
