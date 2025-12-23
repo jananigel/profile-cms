@@ -1,11 +1,13 @@
 import { Loader2 } from 'lucide-react';
 
+import type { MouseEventHandler } from 'react';
+
 interface TextButtonProps {
 	label: string;
 	size?: 'auto' | 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 	btnType?: 'submit' | 'reset' | 'button';
 	btnStyle?: 'primary' | 'secondary';
-	callback?: () => void;
+	callback?: MouseEventHandler<HTMLButtonElement>;
 	isDisabled?: boolean;
 	isLoading?: boolean;
 }
