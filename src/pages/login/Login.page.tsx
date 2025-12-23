@@ -5,7 +5,7 @@ import { type RegisterOptions, type SubmitHandler, useForm } from 'react-hook-fo
 import TextButton from '../../shared/widgets/text-button/TextButton.widget';
 
 interface LoginForm {
-	userName: string;
+	email: string;
 	password: string;
 }
 
@@ -18,14 +18,15 @@ interface FormField {
 
 const formList: FormField[] = [
 	{
-		name: 'userName',
-		label: 'User Name',
+		name: 'email',
+		label: 'Email',
 		fieldIcon: User as LucideIcon,
 		setting: {
 			required: { value: true, message: 'This field is required' },
-			// pattern: {
-			// 	// TODO: email format
-			// },
+			pattern: {
+				value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+				message: 'Please enter a valid email address',
+			},
 		},
 	},
 	{
@@ -34,9 +35,15 @@ const formList: FormField[] = [
 		fieldIcon: Lock as LucideIcon,
 		setting: {
 			required: { value: true, message: 'This field is required' },
-			minLength: { value: 6, message: 'Should over 6 words' },
+			minLength: { value: 6, message: 'Password must be at least 6 characters' },
 			validate: {
-				// TODO: 1 uppercase, 1 special charter, 1 number, 1 lowercase, cannot less than 6 words
+				hasUppercase: (value) =>
+					/[A-Z]/.test(value) || 'Must include at least one uppercase letter',
+				hasLowercase: (value) =>
+					/[a-z]/.test(value) || 'Must include at least one lowercase letter',
+				hasNumber: (value) => /\d/.test(value) || 'Must include at least one number',
+				hasSpecialChar: (value) =>
+					/[^A-Za-z0-9]/.test(value) || 'Must include at least one special character',
 			},
 		},
 	},
