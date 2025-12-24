@@ -1,1 +1,2 @@
 export { type AsideMenu } from './aside-menu.interface';
+export { type MainLayoutContextVal } from './main-layout-context-val.interface';
