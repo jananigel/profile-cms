@@ -1,6 +1,7 @@
 import { Lock, type LucideIcon, ShieldCheck, User } from 'lucide-react';
-import React, { type MouseEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import { type RegisterOptions, type SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import TextButton from '../../shared/widgets/text-button/TextButton.widget';
 
@@ -22,6 +23,7 @@ const formList: FormField[] = [
 		label: 'Email',
 		fieldIcon: User as LucideIcon,
 		setting: {
+			value: 'admin@mail.com',
 			required: { value: true, message: 'This field is required' },
 			pattern: {
 				value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -34,6 +36,7 @@ const formList: FormField[] = [
 		label: 'Password',
 		fieldIcon: Lock as LucideIcon,
 		setting: {
+			value: 'Password!23',
 			required: { value: true, message: 'This field is required' },
 			minLength: { value: 6, message: 'Password must be at least 6 characters' },
 			validate: {
@@ -51,6 +54,7 @@ const formList: FormField[] = [
 
 const LoginPage = () => {
 	const [error, setError] = useState('');
+	const navigate = useNavigate();
 
 	const {
 		formState: { errors },
@@ -60,9 +64,10 @@ const LoginPage = () => {
 
 	const onSubmit: SubmitHandler<LoginForm> = (data, e) => {
 		e?.preventDefault();
-		if (data.userName === 'admin' && data.password === 'password') {
+		if (data.email === 'admin@mail.com' && data.password === 'Password!23') {
 			setError('');
 			// handle login
+			navigate('/dashboard');
 		} else {
 			setError('Invalid credentials. Use admin/password');
 		}
@@ -95,7 +100,7 @@ const LoginPage = () => {
 											size={18}
 										/>
 										<input
-											type={name === 'userName' ? 'text' : 'password'}
+											type={name === 'email' ? 'text' : 'password'}
 											placeholder={label}
 											autoComplete="off"
 											className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
@@ -116,7 +121,7 @@ const LoginPage = () => {
 							<TextButton label={'Log In'} btnType={'submit'}></TextButton>
 						</form>
 						<div className="p-4 text-center bg-slate-50 border-t border-slate-100">
-							<p className="text-xs text-slate-400">Demo mode: admin / password</p>
+							<p className="text-xs text-slate-400">Demo mode: admin@mail.com / Password!23</p>
 						</div>
 					</div>
 				</div>
