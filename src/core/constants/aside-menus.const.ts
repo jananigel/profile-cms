@@ -15,11 +15,11 @@ import type { AsideMenu } from '../interfaces';
 
 export const ASIDE_MENUS: AsideMenu[] = [
 	{ id: 'dashboard', label: 'Dashboard', path: ROUTES.dashboard, icon: LayoutDashboard },
-	{ id: 'base-info', label: 'Profile', path: ROUTES.dashboard, icon: User },
-	{ id: 'career', label: 'Career Paths', path: ROUTES.dashboard, icon: Trophy },
-	{ id: 'education', label: 'Education', path: ROUTES.dashboard, icon: GraduationCap },
-	{ id: 'experience', label: 'Experience', path: ROUTES.dashboard, icon: Briefcase },
-	{ id: 'projects', label: 'Projects', path: ROUTES.dashboard, icon: FolderGit2 },
-	{ id: 'skills', label: 'Skills', path: ROUTES.dashboard, icon: Wrench },
-	{ id: 'stats', label: 'Statistics', path: ROUTES.dashboard, icon: BarChart3 },
+	{ id: 'base-info', label: 'Profile', path: ROUTES.profile, icon: User },
+	{ id: 'career', label: 'Career Paths', path: ROUTES.careerPaths, icon: Trophy },
+	{ id: 'education', label: 'Education', path: ROUTES.education, icon: GraduationCap },
+	{ id: 'experience', label: 'Experience', path: ROUTES.experience, icon: Briefcase },
+	{ id: 'projects', label: 'Projects', path: ROUTES.projects, icon: FolderGit2 },
+	{ id: 'skills', label: 'Skills', path: ROUTES.skills, icon: Wrench },
+	{ id: 'stats', label: 'Statistics', path: ROUTES.statistics, icon: BarChart3 },
 ];
