@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { type RegisterOptions, type SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { ROUTES } from '../../core/constants';
 import TextButton from '../../shared/widgets/text-button/TextButton.widget';
 
 interface LoginForm {
@@ -67,7 +68,7 @@ const LoginPage = () => {
 		if (data.email === 'admin@mail.com' && data.password === 'Password!23') {
 			setError('');
 			// handle login
-			navigate('/dashboard');
+			navigate(ROUTES.dashboard);
 		} else {
 			setError('Invalid credentials. Use admin/password');
 		}
