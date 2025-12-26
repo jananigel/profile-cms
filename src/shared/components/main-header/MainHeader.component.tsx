@@ -1,10 +1,17 @@
+import { Menu } from 'lucide-react';
+
 import { useMainLayout } from '../layouts/main-layout/context/MainLayout.hook';
 
 const MainHeader = () => {
-	const { activeNav } = useMainLayout();
+	const { activeNav, setIsMobileMenuOpen } = useMainLayout();
 	return (
-		<header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 flex-shrink-0">
+		<header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 md:px-8 flex-shrink-0">
 			<div className="flex items-center gap-3">
+				<button
+					onClick={() => setIsMobileMenuOpen(true)}
+					className="md:hidden p-2 text-slate-500 hover:bg-slate-50 rounded-lg transition-colors">
+					<Menu size={20} />
+				</button>
 				<h2 className="text-lg font-semibold text-slate-800">{activeNav}</h2>
 			</div>
 			<div className="flex items-center gap-4">
