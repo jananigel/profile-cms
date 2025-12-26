@@ -14,7 +14,11 @@ const MainLayout = () => {
 				<AsideMenu></AsideMenu>
 				<main className="flex-1 flex flex-col overflow-hidden min-w-0">
 					<MainHeader></MainHeader>
-					<Outlet></Outlet>
+					<div className="flex-1 overflow-y-auto p-4 md:p-8">
+						<div className="max-w-5xl mx-auto pb-20">
+							<Outlet></Outlet>
+						</div>
+					</div>
 				</main>
 			</div>
 		</MainLayoutProvider>
