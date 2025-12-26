@@ -12,6 +12,7 @@ interface MainLayoutProviderProps {
 export const MainLayoutProvider = ({ children }: MainLayoutProviderProps) => {
 	const [activeNav, setActiveNav] = useState('');
 	const location = useLocation();
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	useEffect(() => {
 		const current = ASIDE_MENUS.find((nav) => location.pathname.startsWith(nav.path));
@@ -19,7 +20,8 @@ export const MainLayoutProvider = ({ children }: MainLayoutProviderProps) => {
 	}, [location.pathname]);
 
 	return (
-		<MainLayoutContext.Provider value={{ activeNav, setActiveNav }}>
+		<MainLayoutContext.Provider
+			value={{ activeNav, setActiveNav, isMobileMenuOpen, setIsMobileMenuOpen }}>
 			{children}
 		</MainLayoutContext.Provider>
 	);
