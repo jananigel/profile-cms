@@ -4,6 +4,7 @@ import DashboardStatCard from '../../shared/components/dashboard-stat-card/dashb
 
 import { selectDashboardStats } from './dashboard.selector';
 import CompletenessCard from './shared/components/CompletenessCard.component';
+import TotalExperienceCard from './shared/components/TotalExperienceCard.component';
 
 import type { RootState } from '../../stores/store';
 const DashboardPage = () => {
@@ -17,6 +18,7 @@ const DashboardPage = () => {
 			</div>
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 				<CompletenessCard></CompletenessCard>
+				<TotalExperienceCard></TotalExperienceCard>
 			</div>
 		</div>
 	);
