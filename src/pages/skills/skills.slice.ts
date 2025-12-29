@@ -12,12 +12,15 @@ const skillsState = createSlice({
 	name: 'skills',
 	initialState,
 	reducers: {
-		setExperience(state, action: PayloadAction<Skill>) {
+		addSkill(state, action: PayloadAction<Skill>) {
 			state.skills = [action.payload, ...state.skills];
+		},
+		clearSkills(state) {
+			state.skills = [];
 		},
 	},
 });
 
-export const { setExperience } = skillsState.actions;
+export const { addSkill, clearSkills } = skillsState.actions;
 
 export default skillsState.reducer;
