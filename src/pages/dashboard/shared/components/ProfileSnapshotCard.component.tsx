@@ -1,14 +1,10 @@
 import { useSelector } from 'react-redux';
 
 import CardLayout from '../../../../shared/components/layouts/card-layout/CardLayout.component';
-
-import type { RootState } from '../../../../stores/store';
+import { selectProfileSnapshot } from '../../../dashboard/dashboard.selector';
 
 const ProfileSnapshotCard = () => {
-	const data = useSelector((state: RootState) => ({
-		profile: state.profile.profile,
-		skills: state.skills.skills,
-	}));
+	const data = useSelector(selectProfileSnapshot);
 	return (
 		<CardLayout className="p-6">
 			<h3 className="font-bold text-slate-800 mb-4">Profile Snapshot</h3>

@@ -2,30 +2,10 @@ import { Clock } from 'lucide-react';
 import { useSelector } from 'react-redux';
 
 import CardLayout from '../../../../shared/components/layouts/card-layout/CardLayout.component';
-
-import type { RootState } from '../../../../stores/store';
+import { selectExperienceSummary } from '../../../dashboard/dashboard.selector';
 
 const TotalExperienceCard = () => {
-	const data = useSelector((state: RootState) => {
-		const experiences = state.experience.experiences;
-		const now = new Date();
-		let totalMonths = 0;
-		experiences.forEach((experience) => {
-			const start = new Date(experience.startYear, (experience.startMonth || 1) - 1);
-			const end = experience.endYear
-				? new Date(experience.endYear, (experience.endMonth || 1) - 1)
-				: now;
-			const months =
-				(end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-			totalMonths += Math.max(0, months);
-		});
-
-		return {
-			years: Math.floor(totalMonths / 12),
-			months: totalMonths % 12,
-			jobs: experiences.length,
-		};
-	});
+	const data = useSelector(selectExperienceSummary);
 	return (
 		<CardLayout className="p-6 col-span-1">
 			<h3 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
