@@ -8,9 +8,8 @@ import ProfileSnapshotCard from './shared/components/ProfileSnapshotCard.compone
 import QuickActionsCard from './shared/components/QuickActionsCard.component';
 import TotalExperienceCard from './shared/components/TotalExperienceCard.component';
 
-import type { RootState } from '../../stores/store';
 const DashboardPage = () => {
-	const stats = useSelector((state: RootState) => selectDashboardStats(state));
+	const stats = useSelector(selectDashboardStats);
 	return (
 		<div className="space-y-8">
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

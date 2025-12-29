@@ -4,28 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import AnimatedArcProgress from '../../../../shared/components/animated-arc-progress/AnimatedArcProgress.component';
 import CardLayout from '../../../../shared/components/layouts/card-layout/CardLayout.component';
+import { selectCompleteness } from '../../../dashboard/dashboard.selector';
 import { clearSkills } from '../../../skills/skills.slice';
 
-import type { RootState } from '../../../../stores/store';
-
 const CompletenessCard = () => {
-	const data = useSelector((state: RootState) => {
-		const items = [
-			{ label: '個人聯絡 Email', check: !!state.profile.profile.email },
-			{ label: 'GitHub 連結', check: !!state.profile.profile.github },
-			{ label: 'LinkedIn 連結', check: !!state.profile.profile.linkedin },
-			{ label: '職位頭銜設定', check: !!state.profile.profile.title },
-			{ label: '至少一筆工作經歷', check: state.experience.experiences.length > 0 },
-			{ label: '至少一項專案作品', check: state.project.projects.length > 0 },
-			{ label: '技能列表設定', check: state.skills.skills.length > 0 },
-			{ label: '教育程度設定', check: state.education.educations.length > 0 },
-		];
-		const completedCount = items.filter((i) => i.check).length;
-		return {
-			percentage: Math.round((completedCount / items.length) * 100),
-			pending: items.filter((i) => !i.check).map((i) => i.label),
-		};
-	});
+	const data = useSelector(selectCompleteness);
 
 	// update state: dispatch > action
 	const dispatch = useDispatch();
