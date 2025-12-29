@@ -5,6 +5,7 @@ import DashboardStatCard from '../../shared/components/dashboard-stat-card/dashb
 import { selectDashboardStats } from './dashboard.selector';
 import CompletenessCard from './shared/components/CompletenessCard.component';
 import ProfileSnapshotCard from './shared/components/ProfileSnapshotCard.component';
+import QuickActionsCard from './shared/components/QuickActionsCard.component';
 import TotalExperienceCard from './shared/components/TotalExperienceCard.component';
 
 import type { RootState } from '../../stores/store';
@@ -23,6 +24,7 @@ const DashboardPage = () => {
 			</div>
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 				<ProfileSnapshotCard></ProfileSnapshotCard>
+				<QuickActionsCard></QuickActionsCard>
 			</div>
 		</div>
 	);
