@@ -2,10 +2,12 @@ import { createHashRouter } from 'react-router-dom';
 
 import { ROUTES } from './core/constants';
 import MainLayout from './shared/components/layouts/main-layout/MainLayout.component';
+import RouteHydrateFallback from './shared/components/route-hydrate-fallback/RouteHydrateFallback.component';
 
 export const router = createHashRouter([
 	{
 		path: ROUTES.login,
+		HydrateFallback: RouteHydrateFallback,
 		lazy: async () => {
 			const { default: LoginPage } = await import('./pages/login/Login.page');
 			return { Component: LoginPage };
@@ -13,6 +15,7 @@ export const router = createHashRouter([
 	},
 	{
 		Component: MainLayout,
+		HydrateFallback: RouteHydrateFallback,
 		children: [
 			{
 				path: ROUTES.dashboard,
