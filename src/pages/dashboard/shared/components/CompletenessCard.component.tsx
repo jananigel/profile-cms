@@ -11,12 +11,12 @@ const CompletenessCard = () => {
 	const data = useSelector(selectCompleteness);
 
 	// update state: dispatch > action
-	const dispatch = useDispatch();
-	useEffect(() => {
-		setTimeout(() => {
-			dispatch(clearSkills());
-		}, 3000);
-	});
+	// const dispatch = useDispatch();
+	// useEffect(() => {
+	// 	setTimeout(() => {
+	// 		dispatch(clearSkills());
+	// 	}, 3000);
+	// });
 
 	return (
 		<CardLayout className="p-6 lg:col-span-2">
