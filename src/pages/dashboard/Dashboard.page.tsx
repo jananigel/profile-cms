@@ -6,6 +6,7 @@ import { selectDashboardStats } from './dashboard.selector';
 import CompletenessCard from './shared/components/CompletenessCard.component';
 import ProfileSnapshotCard from './shared/components/ProfileSnapshotCard.component';
 import QuickActionsCard from './shared/components/QuickActionsCard.component';
+import SkillSectionCard from './shared/components/skill-section/SkillSectionCard.component';
 import TotalExperienceCard from './shared/components/TotalExperienceCard.component';
 
 const DashboardPage = () => {
@@ -20,6 +21,9 @@ const DashboardPage = () => {
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 				<CompletenessCard></CompletenessCard>
 				<TotalExperienceCard></TotalExperienceCard>
+			</div>
+			<div className="w-full">
+				<SkillSectionCard></SkillSectionCard>
 			</div>
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 				<ProfileSnapshotCard></ProfileSnapshotCard>
