@@ -25,7 +25,7 @@ export const selectDashboardStats = createSelector(
 				value: statsMap[stat.tab as keyof typeof statsMap],
 			};
 		});
-	}
+	},
 );
 
 export const selectProfileSnapshot = createSelector(
@@ -33,30 +33,28 @@ export const selectProfileSnapshot = createSelector(
 	(profile, skills) => ({
 		profile,
 		skills,
-	})
+	}),
 );
 
-export const selectExperienceSummary = createSelector(
-	[selectExperiences],
-	(experiences) => {
-		const now = new Date();
-		let totalMonths = 0;
-		experiences.forEach((experience) => {
-			const start = new Date(experience.startYear, (experience.startMonth || 1) - 1);
-			const end = experience.endYear
-				? new Date(experience.endYear, (experience.endMonth || 1) - 1)
-				: now;
-			const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-			totalMonths += Math.max(0, months);
-		});
+export const selectExperienceSummary = createSelector([selectExperiences], (experiences) => {
+	const now = new Date();
+	let totalMonths = 0;
+	experiences.forEach((experience) => {
+		const start = new Date(experience.startYear, (experience.startMonth || 1) - 1);
+		const end = experience.endYear
+			? new Date(experience.endYear, (experience.endMonth || 1) - 1)
+			: now;
+		const months =
+			(end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+		totalMonths += Math.max(0, months);
+	});
 
-		return {
-			years: Math.floor(totalMonths / 12),
-			months: totalMonths % 12,
-			jobs: experiences.length,
-		};
-	}
-);
+	return {
+		years: Math.floor(totalMonths / 12),
+		months: totalMonths % 12,
+		jobs: experiences.length,
+	};
+});
 
 export const selectCompleteness = createSelector(
 	[selectProfile, selectExperiences, selectProjects, selectSkills, selectEducations],
@@ -76,5 +74,9 @@ export const selectCompleteness = createSelector(
 			percentage: Math.round((completedCount / items.length) * 100),
 			pending: items.filter((i) => !i.check).map((i) => i.label),
 		};
-	}
+	},
 );
+
+export const selectSkillsInfo = createSelector([selectSkills], (skills) => {
+	return { skills };
+});

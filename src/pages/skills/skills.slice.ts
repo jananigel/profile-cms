@@ -1,12 +1,38 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
+import { SKILL_CATEGORY } from '../../core/constants';
+
 interface Skill {
+	id: string;
 	name: string;
+	category: string;
+	isHighlight: boolean;
+	proficiency: number;
+	scenario: string;
 }
 
 type SkillState = { skills: Skill[] };
 
-const initialState: SkillState = { skills: [{ name: 'test' }] };
+const initialState: SkillState = {
+	skills: [
+		{
+			id: '1',
+			name: 'React',
+			category: SKILL_CATEGORY.frameWork,
+			isHighlight: true,
+			proficiency: 4,
+			scenario: '用於多個大型電商專案',
+		},
+		{
+			id: '2',
+			name: 'TypeScript',
+			category: SKILL_CATEGORY.languages,
+			isHighlight: true,
+			proficiency: 3,
+			scenario: '正式專案開發必備工具',
+		},
+	],
+};
 
 const skillsState = createSlice({
 	name: 'skills',
