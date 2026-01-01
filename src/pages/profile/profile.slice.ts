@@ -23,12 +23,12 @@ const profileState = createSlice({
 	name: 'profile',
 	initialState,
 	reducers: {
-		setExperience(state, action: PayloadAction<Profile>) {
+		setProfile(state, action: PayloadAction<Profile>) {
 			state.profile = { ...state.profile, ...action.payload };
 		},
 	},
 });
 
-export const { setExperience } = profileState.actions;
+export const { setProfile } = profileState.actions;
 
 export default profileState.reducer;

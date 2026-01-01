@@ -1,14 +1,17 @@
 import { Save } from 'lucide-react';
+import { useEffect, useMemo } from 'react';
 import { Controller, type RegisterOptions, type SubmitHandler, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import BaseCheckbox from '../../shared/components/base-checkbox/BaseCheckbox.compnent';
 import BaseInput from '../../shared/components/base-input/BaseInput.component';
 import CardLayout from '../../shared/components/layouts/card-layout/CardLayout.component';
 import PageHeader from '../../shared/components/page-header/PageHeader.component';
 
+import { setProfile } from './profile.slice';
+
 import type { Profile } from '../../core/interfaces';
-import type { RootState } from '../../stores/store';
+import type { AppDispatch, RootState } from '../../stores/store';
 
 type ProfileFieldName = keyof Profile;
 
@@ -83,24 +86,32 @@ const formSections: FormSection[] = [
 	},
 ];
 
-const ProfilePage = () => {
-	const defaultValues = formSections.reduce((values, section) => {
-		section.fields.forEach((field) => {
-			(values as Record<keyof Profile, Profile[keyof Profile]>)[field.name] = field.defaultValue;
-		});
-		return values;
-	}, {} as Partial<Profile>) as Profile;
+const baseFormValues = formSections.reduce((values, section) => {
+	section.fields.forEach((field) => {
+		(values as Record<keyof Profile, Profile[keyof Profile]>)[field.name] = field.defaultValue;
+	});
+	return values;
+}, {} as Partial<Profile>) as Profile;
 
+const ProfilePage = () => {
+	const dispatch = useDispatch<AppDispatch>();
+	const profileData = useSelector((state: RootState) => state.profile.profile);
+	const defaultValues = useMemo(() => ({ ...baseFormValues, ...profileData }), [profileData]);
 	const {
 		formState: { errors },
 		register,
 		handleSubmit,
 		control,
+		reset,
 	} = useForm<Profile>({ defaultValues });
+
+	useEffect(() => {
+		reset(defaultValues);
+	}, [defaultValues, reset]);
 
 	const onSubmit: SubmitHandler<Profile> = (data, e) => {
 		e?.preventDefault();
-		console.log('data = ', data);
+		dispatch(setProfile(data));
 	};
 
 	return (
