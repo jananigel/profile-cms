@@ -3,11 +3,13 @@ import { useState } from 'react';
 
 import AnimatedCircularProgress from '../../../../../shared/components/animated-circular-progress/AnimatedCircularProgress.component';
 
+import type { Skill } from '../../../../../core/interfaces';
+
 interface ProficiencyGroupProps {
 	percentage: number;
 	color: string;
 	label: string;
-	skills: any;
+	skills: Skill[];
 }
 
 const ProficiencyGroup = ({ percentage, color, label, skills }: ProficiencyGroupProps) => {
