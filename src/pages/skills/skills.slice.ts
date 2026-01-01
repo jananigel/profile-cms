@@ -2,14 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { SKILL_CATEGORY } from '../../core/constants';
 
-interface Skill {
-	id: string;
-	name: string;
-	category: string;
-	isHighlight: boolean;
-	proficiency: number;
-	scenario: string;
-}
+import type { Skill } from '../../core/interfaces';
 
 type SkillState = { skills: Skill[] };
 

@@ -4,6 +4,7 @@ import { type RegisterOptions, type SubmitHandler, useForm } from 'react-hook-fo
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTES } from '../../core/constants';
+import BaseInput from '../../shared/components/base-input/BaseInput.component';
 import TextButton from '../../shared/widgets/text-button/TextButton.widget';
 
 interface LoginForm {
@@ -90,28 +91,23 @@ const LoginPage = () => {
 							{formList.map(({ name, setting, label, fieldIcon }) => {
 								const Icon = fieldIcon;
 								const fieldRegister = register(name, setting);
+								const { ref, onChange, ...fieldProps } = fieldRegister;
 								const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 									setError('');
-									fieldRegister.onChange(event);
+									onChange(event);
 								};
 								return (
-									<div className="relative" key={name}>
-										<Icon
-											className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-											size={18}
-										/>
-										<input
-											type={name === 'email' ? 'text' : 'password'}
-											placeholder={label}
-											autoComplete="off"
-											className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-											{...fieldRegister}
-											onChange={handleInputChange}
-										/>
-										{errors[name] && (
-											<p className="absolute text-[#f00] text-sm">{errors[name]?.message}</p>
-										)}
-									</div>
+									<BaseInput
+										key={name}
+										type={name === 'email' ? 'text' : 'password'}
+										placeholder={label}
+										autoComplete="off"
+										leftIcon={<Icon className="text-slate-400" size={18} />}
+										error={errors[name]?.message}
+										{...fieldProps}
+										onChange={handleInputChange}
+										ref={ref}
+									/>
 								);
 							})}
 							{error && (
