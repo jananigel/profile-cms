@@ -3,7 +3,7 @@ import TextButton from '../../widgets/text-button/TextButton.widget';
 interface PageHeaderProps {
 	title: string;
 	description: string;
-	onAdd: () => void;
+	onAdd?: () => void;
 	addLabel?: string;
 }
 
