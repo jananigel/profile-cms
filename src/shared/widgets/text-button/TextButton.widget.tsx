@@ -47,7 +47,7 @@ const TextButton = ({
 			disabled={computedDisabled}
 			aria-disabled={computedDisabled}
 			aria-busy={isLoading}
-			className={`${getBtnSize()} ${getBtnStyle()} flex justify-center rounded-xl transition-colors shadow-lg shadow-blue-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60`}>
+			className={`${getBtnSize()} ${getBtnStyle()} flex justify-center items-center rounded-xl transition-colors shadow-lg shadow-blue-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60`}>
 			{isLoading ? <Loader2 className="animate-spin"></Loader2> : label}
 		</button>
 	);
