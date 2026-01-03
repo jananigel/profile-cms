@@ -5,3 +5,4 @@ export { type Skill } from './skill.interface';
 export { type Profile } from './profile.interface';
 export { type Education } from './education.interface';
 export { type JobExperience } from './job-experience.interface';
+export { type Project } from './project.interface';
