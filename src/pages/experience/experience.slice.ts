@@ -1,10 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
+import { uuid } from '../../core/utilts';
+
 import type { JobExperience } from '../../core/interfaces';
 
 const MOCK_DATA: JobExperience[] = [
 	{
-		id: '1',
+		id: uuid(),
 		company: 'Tech Corp',
 		role: 'Frontend Lead',
 		period: '2021 - Present',
@@ -16,7 +18,7 @@ const MOCK_DATA: JobExperience[] = [
 		endMonth: null,
 	},
 	{
-		id: '1',
+		id: uuid(),
 		company: 'Tech Corp',
 		role: 'Frontend Lead',
 		period: '2019 - 2021',
@@ -37,12 +39,15 @@ const experienceState = createSlice({
 	name: 'experience',
 	initialState,
 	reducers: {
-		setExperience(state, action: PayloadAction<JobExperience>) {
+		addExperience(state, action: PayloadAction<JobExperience>) {
 			state.experiences = [action.payload, ...state.experiences];
+		},
+		deleteExperience(state, action: PayloadAction<string>) {
+			state.experiences = state.experiences.filter((data) => data.id !== action.payload);
 		},
 	},
 });
 
-export const { setExperience } = experienceState.actions;
+export const { addExperience, deleteExperience } = experienceState.actions;
 
 export default experienceState.reducer;
