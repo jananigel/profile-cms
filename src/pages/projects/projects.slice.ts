@@ -8,7 +8,7 @@ const MOCK_DATA: Project[] = [
 	{
 		id: uuid(),
 		title: 'Portfolio CMS',
-		description: 'A modern admin panel for managing personal sites.',
+		description: ['A modern admin panel for managing personal sites.'],
 		techStack: ['React', 'Tailwind', 'Lucide'],
 		link: 'https://github.com/example/cms',
 		type: 'Github',
@@ -29,9 +29,17 @@ const projectSlice = createSlice({
 		deleteProject(state, action: PayloadAction<string>) {
 			state.projects = state.projects.filter((data) => data.id !== action.payload);
 		},
+		updateProject(state, action: PayloadAction<Project>) {
+			state.projects = state.projects.map((project) => {
+				if (project.id === action.payload.id) {
+					return { ...action.payload };
+				}
+				return { ...project };
+			});
+		},
 	},
 });
 
-export const { addProject, deleteProject } = projectSlice.actions;
+export const { addProject, deleteProject, updateProject } = projectSlice.actions;
 
 export default projectSlice.reducer;
