@@ -13,11 +13,19 @@ export interface JobExperience {
 	endMonth: number | null;
 }
 
-type FormFieldName = keyof JobExperience;
+export interface JobExperienceFormValues {
+	company: string;
+	role: string;
+	period: string;
+	techStack: string;
+	description: string;
+}
+
+type FormFieldName = keyof JobExperienceFormValues;
 
 export interface JobExperienceFormField<Name extends FormFieldName = FormFieldName> {
 	name: Name;
 	label: string;
 	defaultValue: string;
-	setting?: RegisterOptions<JobExperience>;
+	setting?: RegisterOptions<JobExperienceFormValues>;
 }

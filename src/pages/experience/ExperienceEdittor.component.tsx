@@ -4,16 +4,18 @@ import BaseInput from '../../shared/components/base-input/BaseInput.component';
 import BaseTextArea from '../../shared/components/base-textarea/BaseTextarea.component';
 import CardLayout from '../../shared/components/layouts/card-layout/CardLayout.component';
 
-import type { JobExperience } from '../../core/interfaces';
-import type { JobExperienceFormField } from '../../core/interfaces/job-experience.interface';
+import type {
+	JobExperienceFormField,
+	JobExperienceFormValues,
+} from '../../core/interfaces/job-experience.interface';
 import type { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 interface JobExperienceEdittorProps {
 	onCancel: () => void;
 	onSubmit: React.FormEventHandler<HTMLFormElement>;
-	register: UseFormRegister<JobExperience>;
+	register: UseFormRegister<JobExperienceFormValues>;
 	formFields: JobExperienceFormField[];
-	errors: FieldErrors<JobExperience>;
+	errors: FieldErrors<JobExperienceFormValues>;
 }
 
 const JobExperienceEdittor = ({
