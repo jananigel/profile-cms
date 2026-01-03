@@ -1,6 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-const MOCK_DATA = [
+import type { JobExperience } from '../../core/interfaces';
+
+const MOCK_DATA: JobExperience[] = [
 	{
 		id: '1',
 		company: 'Tech Corp',
@@ -27,20 +29,7 @@ const MOCK_DATA = [
 	},
 ];
 
-interface Experience {
-	id: string;
-	company: string;
-	role: string;
-	period: string;
-	description: string[];
-	techStack: string[];
-	startYear: number;
-	startMonth: number;
-	endYear: number | null;
-	endMonth: number | null;
-}
-
-type ExperienceState = { experiences: Experience[] };
+type ExperienceState = { experiences: JobExperience[] };
 
 const initialState: ExperienceState = { experiences: MOCK_DATA };
 
@@ -48,7 +37,7 @@ const experienceState = createSlice({
 	name: 'experience',
 	initialState,
 	reducers: {
-		setExperience(state, action: PayloadAction<Experience>) {
+		setExperience(state, action: PayloadAction<JobExperience>) {
 			state.experiences = [action.payload, ...state.experiences];
 		},
 	},
