@@ -5,7 +5,17 @@ import BaseSelect from '../../shared/components/base-select/BaseSelect.component
 import CardLayout from '../../shared/components/layouts/card-layout/CardLayout.component';
 import TextButton from '../../shared/widgets/text-button/TextButton.widget';
 
-const SkillEditor = () => {
+import type { SkillFormField, SkillFormValue } from '../../core/interfaces/skill.interface';
+import type { FieldErrors, UseFormRegister } from 'react-hook-form';
+
+interface SkillEditorProps {
+	onSubmit: React.FormEventHandler<HTMLFormElement>;
+	register: UseFormRegister<SkillFormValue>;
+	formFields: SkillFormField[];
+	errors: FieldErrors<SkillFormValue>;
+}
+
+const SkillEditor = (props: SkillEditorProps) => {
 	const categories = Object.values(SKILL_CATEGORY);
 	return (
 		<CardLayout className="p-6 border-indigo-100 bg-indigo-50/10">
@@ -26,7 +36,7 @@ const SkillEditor = () => {
 					<BaseInput label="Application Scenario" placeholder="e.g. 用於正式電商專案開發..." />
 				</div>
 				<div className="flex items-end">
-					<TextButton label={'Add Skill'} />
+					<TextButton label={'Add Skill'} callback={() => props.onSubmit} />
 				</div>
 			</div>
 		</CardLayout>
