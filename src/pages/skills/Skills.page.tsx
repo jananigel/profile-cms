@@ -1,23 +1,25 @@
 import { useForm } from 'react-hook-form';
 
+import { SKILL_CATEGORY } from '../../core/constants';
 import PageHeader from '../../shared/components/page-header/PageHeader.component';
 
 import SkillEditor from './SkillEdittor.component';
 
 import type { ProficiencyLevel } from '../../core/constants/proficiency-configs.const';
-import type { Skill, SkillFormField, SkillFormValue } from '../../core/interfaces/skill.interface';
+import type { SkillFormField, SkillFormValue } from '../../core/interfaces/skill.interface';
 
-const formFields: SkillFormField[] = [
+const formFields = [
 	{
 		name: 'skillName',
 		label: 'Skill Name',
 		defaultValue: '',
 		fieldType: 'input',
+		placeholder: 'e.g. React',
 	},
 	{
 		name: 'category',
 		label: 'Category',
-		defaultValue: '',
+		defaultValue: SKILL_CATEGORY.frameWork,
 		fieldType: 'select',
 	},
 	{
@@ -37,8 +39,17 @@ const formFields: SkillFormField[] = [
 		label: 'Application Scenario',
 		defaultValue: '',
 		fieldType: 'input',
+		placeholder: 'e.g. 用於正式電商專案開發...',
 	},
-];
+] as const satisfies SkillFormField[];
+
+const defaultSkillFormValues = formFields.reduce<SkillFormValue>((acc, field) => {
+	const fieldName = field.name;
+	return {
+		...acc,
+		[fieldName]: field.defaultValue,
+	} as SkillFormValue;
+}, {} as SkillFormValue);
 
 const SkillsPage = () => {
 	const {
@@ -46,7 +57,9 @@ const SkillsPage = () => {
 		register,
 		handleSubmit,
 		reset,
-	} = useForm<SkillFormValue>();
+	} = useForm<SkillFormValue>({
+		defaultValues: defaultSkillFormValues,
+	});
 
 	const addSkill = (skill: SkillFormValue) => {
 		console.log('skill = ', skill);
