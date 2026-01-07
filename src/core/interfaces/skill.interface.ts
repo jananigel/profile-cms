@@ -6,7 +6,7 @@ export interface Skill {
 	name: string;
 	category: string;
 	isHighlight: boolean;
-	proficiency: number;
+	proficiency: ProficiencyLevel;
 	scenario: string;
 }
 
