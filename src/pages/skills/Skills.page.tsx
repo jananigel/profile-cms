@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { SKILL_CATEGORY } from '../../core/constants';
+import { uuid } from '../../core/utilts';
 import PageHeader from '../../shared/components/page-header/PageHeader.component';
+import { selectSkillsInfo } from '../dashboard/dashboard.selector';
 
 import SkillEditor from './SkillEdittor.component';
+import { addSkill } from './skills.slice';
 
 import type { ProficiencyLevel } from '../../core/constants/proficiency-configs.const';
 import type { SkillFormField, SkillFormValue } from '../../core/interfaces/skill.interface';
@@ -52,6 +57,9 @@ const defaultSkillFormValues = formFields.reduce<SkillFormValue>((acc, field) =>
 }, {} as SkillFormValue);
 
 const SkillsPage = () => {
+	const skills = useSelector(selectSkillsInfo);
+	const dispatch = useDispatch();
+	const [editingSkillId, setEditingSkillId] = useState<string | null>(null);
 	const {
 		formState: { errors },
 		register,
@@ -61,8 +69,12 @@ const SkillsPage = () => {
 		defaultValues: defaultSkillFormValues,
 	});
 
-	const addSkill = (skill: SkillFormValue) => {
-		console.log('skill = ', skill);
+	const addSkillClick = (skill: SkillFormValue) => {
+		const payload: Skill = {
+			id: editingSkillId ?? uuid(),
+			...skill,
+		};
+		dispatch(addSkill(payload));
 	};
 	return (
 		<div className="space-y-8">
@@ -71,7 +83,7 @@ const SkillsPage = () => {
 				description="Your technical stack categorized with proficiency details."
 			/>
 			<SkillEditor
-				onSubmit={handleSubmit(addSkill)}
+				onSubmit={handleSubmit(addSkillClick)}
 				formFields={formFields}
 				register={register}
 				errors={errors}
