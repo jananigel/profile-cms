@@ -6,7 +6,7 @@ export interface Skill {
 	name: string;
 	category: string;
 	isHighlight: boolean;
-	proficiency: number;
+	proficiency: ProficiencyLevel;
 	scenario: string;
 }
 
@@ -23,7 +23,8 @@ type FormFieldName = keyof SkillFormValue;
 export interface SkillFormField<Name extends FormFieldName = FormFieldName> {
 	name: Name;
 	label: string;
-	defaultValue: string | boolean | ProficiencyLevel;
+	defaultValue: SkillFormValue[Name];
 	setting?: RegisterOptions<SkillFormValue>;
 	fieldType: 'input' | 'select' | 'checkbox';
+	placeholder?: string;
 }
