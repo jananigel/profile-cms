@@ -37,9 +37,23 @@ const skillsState = createSlice({
 		clearSkills(state) {
 			state.skills = [];
 		},
+		removeSkill(state, action: PayloadAction<string>) {
+			state.skills = state.skills.filter((skill) => skill.id !== action.payload);
+		},
+		updateIsHighLight(state, action: PayloadAction<string>) {
+			state.skills = state.skills.map((skill) => {
+				if (skill.id === action.payload) {
+					return {
+						...skill,
+						isHighlight: !skill.isHighlight,
+					};
+				}
+				return skill;
+			});
+		},
 	},
 });
 
-export const { addSkill, clearSkills } = skillsState.actions;
+export const { addSkill, clearSkills, removeSkill, updateIsHighLight } = skillsState.actions;
 
 export default skillsState.reducer;
