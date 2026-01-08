@@ -1,10 +1,9 @@
-import type { LucideIcon } from 'lucide-react';
 import type { RegisterOptions } from 'react-hook-form';
 
 interface BaseStastics {
 	titleKey: string;
 	value: string;
-	iconName: LucideIcon;
+	iconName: string;
 	color: string;
 }
 

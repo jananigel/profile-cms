@@ -1,4 +1,5 @@
 import { Activity, Trash2 } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +10,7 @@ import PageHeader from '../../shared/components/page-header/PageHeader.component
 import { addStatistic, deleteStatistic } from './statistics.slice';
 import StatisticsEditor from './StatisticsEditor.component';
 
+import type { LucideIcon as LucideIconComponent } from 'lucide-react';
 import type { Statistics } from '../../core/interfaces';
 import type {
 	StatisticsFormField,
@@ -54,6 +56,10 @@ const defaultStatisticsFormValues = formFields.reduce<StatisticsFormValue>((acc,
 	};
 }, {} as StatisticsFormValue);
 
+// Treat the lucide-react bundle as a lookup table keyed by export name.
+const lucideIconLibrary =
+	LucideIcons as unknown as Record<string, LucideIconComponent | undefined>;
+
 const StatisticsPage = () => {
 	const statistics = useSelector((state: RootState) => state.statistics.statistics);
 	const dispatch = useDispatch();
@@ -91,7 +97,7 @@ const StatisticsPage = () => {
 			/>
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 				{statistics.map((stat) => {
-					const IconComp = stat.iconName || Activity;
+					const IconComp = lucideIconLibrary[stat.iconName] ?? Activity;
 					return (
 						<CardLayout
 							key={stat.id}
