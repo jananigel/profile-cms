@@ -25,6 +25,9 @@ const formFields = [
 		defaultValue: '',
 		fieldType: 'input',
 		placeholder: 'e.g. Years Exp',
+		setting: {
+			required: 'Label is required',
+		},
 	},
 	{
 		name: 'value',
@@ -32,12 +35,18 @@ const formFields = [
 		defaultValue: '',
 		fieldType: 'input',
 		placeholder: 'e.g. 5+',
+		setting: {
+			required: 'Value is required',
+		},
 	},
 	{
 		name: 'iconName',
 		label: 'ICON Name',
 		defaultValue: '',
 		fieldType: 'input',
+		setting: {
+			required: 'Icon name is required',
+		},
 	},
 	{
 		name: 'color',
@@ -45,6 +54,9 @@ const formFields = [
 		defaultValue: '',
 		fieldType: 'input',
 		placeholder: 'e.g. #ff0000',
+		setting: {
+			required: 'Color is required',
+		},
 	},
 ] as const satisfies StatisticsFormField[];
 
