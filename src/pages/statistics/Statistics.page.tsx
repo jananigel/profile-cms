@@ -1,12 +1,15 @@
 import { Activity, Trash2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { uuid } from '../../core/utilts';
 import CardLayout from '../../shared/components/layouts/card-layout/CardLayout.component';
 import PageHeader from '../../shared/components/page-header/PageHeader.component';
 
+import { addStatistic, deleteStatistic } from './statistics.slice';
 import StatisticsEditor from './StatisticsEditor.component';
 
+import type { Statistics } from '../../core/interfaces';
 import type {
 	StatisticsFormField,
 	StatisticsFormValue,
@@ -53,6 +56,7 @@ const defaultStatisticsFormValues = formFields.reduce<StatisticsFormValue>((acc,
 
 const StatisticsPage = () => {
 	const statistics = useSelector((state: RootState) => state.statistics.statistics);
+	const dispatch = useDispatch();
 	const {
 		formState: { errors },
 		register,
@@ -60,11 +64,18 @@ const StatisticsPage = () => {
 		reset,
 	} = useForm<StatisticsFormValue>({ defaultValues: defaultStatisticsFormValues });
 
-	const addStatistics = (data: StatisticsFormValue) => {
-		console.log('data = ', data);
+	const addItem = (data: StatisticsFormValue) => {
+		const stat: Statistics = {
+			id: uuid(),
+			...data,
+		};
+		dispatch(addStatistic(stat));
+		reset(defaultStatisticsFormValues);
 	};
 
-	const removeItem = (id: string) => {};
+	const removeItem = (id: string) => {
+		dispatch(deleteStatistic(id));
+	};
 
 	return (
 		<div className="space-y-6">
@@ -75,7 +86,7 @@ const StatisticsPage = () => {
 			<StatisticsEditor
 				formFields={formFields}
 				register={register}
-				onSubmit={handleSubmit(addStatistics)}
+				onSubmit={handleSubmit(addItem)}
 				errors={errors}
 			/>
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
