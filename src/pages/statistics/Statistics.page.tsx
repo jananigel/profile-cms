@@ -1,5 +1,8 @@
+import { Activity, Trash2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
+import CardLayout from '../../shared/components/layouts/card-layout/CardLayout.component';
 import PageHeader from '../../shared/components/page-header/PageHeader.component';
 
 import StatisticsEditor from './StatisticsEditor.component';
@@ -8,6 +11,7 @@ import type {
 	StatisticsFormField,
 	StatisticsFormValue,
 } from '../../core/interfaces/statistics.interface';
+import type { RootState } from '../../stores/store';
 
 const formFields = [
 	{
@@ -19,7 +23,7 @@ const formFields = [
 	},
 	{
 		name: 'value',
-		label: 'value',
+		label: 'Value',
 		defaultValue: '',
 		fieldType: 'input',
 		placeholder: 'e.g. 5+',
@@ -48,6 +52,7 @@ const defaultStatisticsFormValues = formFields.reduce<StatisticsFormValue>((acc,
 }, {} as StatisticsFormValue);
 
 const StatisticsPage = () => {
+	const statistics = useSelector((state: RootState) => state.statistics.statistics);
 	const {
 		formState: { errors },
 		register,
@@ -58,6 +63,8 @@ const StatisticsPage = () => {
 	const addStatistics = (data: StatisticsFormValue) => {
 		console.log('data = ', data);
 	};
+
+	const removeItem = (id: string) => {};
 
 	return (
 		<div className="space-y-6">
@@ -71,6 +78,34 @@ const StatisticsPage = () => {
 				onSubmit={handleSubmit(addStatistics)}
 				errors={errors}
 			/>
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				{statistics.map((stat) => {
+					const IconComp = stat.iconName || Activity;
+					return (
+						<CardLayout
+							key={stat.id}
+							className="p-6 flex items-center justify-between border-l-4"
+							style={{ borderLeftColor: stat.color }}>
+							<div className="flex items-center gap-4">
+								<div className="p-3 rounded-xl bg-slate-50 text-slate-600">
+									<IconComp size={24} color={stat.color} />
+								</div>
+								<div>
+									<p className="text-2xl font-bold text-slate-900">{stat.value}</p>
+									<p className="text-xs text-slate-500 font-medium uppercase tracking-wider">
+										{stat.titleKey}
+									</p>
+								</div>
+							</div>
+							<button
+								onClick={() => removeItem(stat.id)}
+								className="p-2 text-slate-300 hover:text-red-500 transition-colors">
+								<Trash2 size={18} />
+							</button>
+						</CardLayout>
+					);
+				})}
+			</div>
 		</div>
 	);
 };
