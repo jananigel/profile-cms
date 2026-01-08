@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { Briefcase } from 'lucide-react';
 
 import type { Statistics } from '../../core/interfaces';
 
