@@ -57,6 +57,7 @@ const formList: FormField[] = [
 const LoginPage = () => {
 	const [error, setError] = useState('');
 	const navigate = useNavigate();
+	const [isLogging, setIsLogging] = useState(false);
 
 	const {
 		formState: { errors },
@@ -66,13 +67,17 @@ const LoginPage = () => {
 
 	const onSubmit: SubmitHandler<LoginForm> = (data, e) => {
 		e?.preventDefault();
-		if (data.email === 'admin@mail.com' && data.password === 'Password!23') {
-			setError('');
-			// handle login
-			navigate(ROUTES.dashboard);
-		} else {
-			setError('Invalid credentials. Use admin/password');
-		}
+		setIsLogging(true);
+		setTimeout(() => {
+			if (data.email === 'admin@mail.com' && data.password === 'Password!23') {
+				setError('');
+				// handle login
+				navigate(ROUTES.dashboard);
+			} else {
+				setError('Invalid credentials. Use admin/password');
+			}
+			setIsLogging(false);
+		}, 2000);
 	};
 
 	return (
@@ -123,7 +128,11 @@ const LoginPage = () => {
 									忘記密碼？
 								</button>
 							</div>
-							<TextButton label={'Log In'} btnType={'submit'}></TextButton>
+							<TextButton
+								label={'Log In'}
+								btnType={'submit'}
+								isDisabled={isLogging}
+								isLoading={isLogging}></TextButton>
 							<div className="text-center">
 								<span className="text-sm text-slate-500">還沒有帳號？ </span>
 								<button type="button" className="text-sm font-bold text-blue-600 hover:underline">
