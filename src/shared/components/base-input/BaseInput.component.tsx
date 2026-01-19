@@ -13,10 +13,22 @@ interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
 	error?: ReactNode;
 	containerClassName?: string;
 	label?: string;
+	required?: boolean;
 }
 
 const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
-	({ leftIcon, error, label = '', containerClassName = '', className = '', ...rest }, ref) => {
+	(
+		{
+			leftIcon,
+			error,
+			label = '',
+			containerClassName = '',
+			className = '',
+			required = false,
+			...rest
+		},
+		ref,
+	) => {
 		const iconElement = leftIcon
 			? cloneElement(leftIcon, {
 					className:
@@ -35,7 +47,7 @@ const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
 				<div className={`space-y-1 ${containerClassName}`.trim()}>
 					<div className="relative">
 						{iconElement}
-						<input ref={ref} className={inputClassName} {...rest} />
+						<input ref={ref} className={inputClassName} {...rest} required={required} />
 					</div>
 					{error ? <p className="text-sm text-[#f00]">{error}</p> : null}
 				</div>
