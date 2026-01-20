@@ -1,5 +1,7 @@
 export const ROUTES = {
 	login: '/',
+	forgotPassword: 'forgot-password',
+	resetPassword: 'reset-password',
 	dashboard: '/dashboard',
 	profile: '/profile',
 	careerPaths: '/career-paths',

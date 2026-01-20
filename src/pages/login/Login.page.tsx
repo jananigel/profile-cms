@@ -124,7 +124,10 @@ const LoginPage = () => {
 								})}
 							</div>
 							<div className="flex justify-end">
-								<button type="button" className="text-xs font-medium text-blue-600 hover:underline">
+								<button
+									type="button"
+									className="text-xs font-medium text-blue-600 hover:underline"
+									onClick={() => navigate(ROUTES.forgotPassword)}>
 									忘記密碼？
 								</button>
 							</div>

@@ -6,7 +6,7 @@ interface TextButtonProps {
 	label: string;
 	size?: 'auto' | 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 	btnType?: 'submit' | 'reset' | 'button';
-	btnStyle?: 'primary' | 'secondary';
+	btnStyle?: 'primary' | 'secondary' | 'amber';
 	callback?: MouseEventHandler<HTMLButtonElement>;
 	isDisabled?: boolean;
 	isLoading?: boolean;
@@ -30,8 +30,11 @@ const TextButton = ({
 	};
 
 	const stylesMap = {
-		primary: 'bg-blue-600 text-white font-bold hover:bg-blue-700',
-		secondary: 'bg-white text-blue-600 border border-blue-600 hover:bg-blue-700 hover:text-white',
+		primary: 'bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-blue-200 ',
+		secondary:
+			'bg-white text-blue-600 border border-blue-600 hover:bg-blue-700 hover:text-white shadow-blue-200 ',
+		amber:
+			'w-full py-3 text-white rounded-xl font-bold transition-all shadow-lg disabled:opacity-50 bg-amber-500 hover:bg-amber-600 shadow-amber-100',
 	} as const;
 
 	const getBtnStyle = (): string => {
@@ -47,7 +50,7 @@ const TextButton = ({
 			disabled={computedDisabled}
 			aria-disabled={computedDisabled}
 			aria-busy={isLoading}
-			className={`${getBtnSize()} ${getBtnStyle()} flex justify-center items-center rounded-xl transition-colors shadow-lg shadow-blue-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60`}>
+			className={`${getBtnSize()} ${getBtnStyle()} flex justify-center items-center rounded-xl transition-colors shadow-lg cursor-pointer disabled:cursor-not-allowed disabled:opacity-60`}>
 			{isLoading ? <Loader2 className="animate-spin"></Loader2> : label}
 		</button>
 	);
