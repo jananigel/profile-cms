@@ -43,6 +43,14 @@ export const router = createHashRouter([
 				},
 			},
 			{
+				path: ROUTES.register,
+				HydrateFallback: RouteHydrateFallback,
+				lazy: async () => {
+					const { default: RegisterPage } = await import('./pages/register/register.page');
+					return { Component: RegisterPage };
+				},
+			},
+			{
 				Component: MainLayout,
 				HydrateFallback: RouteHydrateFallback,
 				children: [
