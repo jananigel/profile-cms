@@ -14,6 +14,16 @@ export const router = createHashRouter([
 		},
 	},
 	{
+		path: ROUTES.forgotPassword,
+		HydrateFallback: RouteHydrateFallback,
+		lazy: async () => {
+			const { default: ForgotPasswordPage } = await import(
+				'./pages/forgot-password/ForgotPassword.page'
+			);
+			return { Component: ForgotPasswordPage };
+		},
+	},
+	{
 		Component: MainLayout,
 		HydrateFallback: RouteHydrateFallback,
 		children: [
