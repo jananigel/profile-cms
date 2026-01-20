@@ -5,13 +5,16 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 
 import './index.scss';
+import ErrorBoundary from './core/services/error-boundary.service.tsx';
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<QueryClientProvider client={queryClient}>
-			<App />
-		</QueryClientProvider>
+		<ErrorBoundary>
+			<QueryClientProvider client={queryClient}>
+				<App />
+			</QueryClientProvider>
+		</ErrorBoundary>
 	</StrictMode>,
 );
