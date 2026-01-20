@@ -96,7 +96,7 @@ const ForgotPasswordPage = () => {
 									<button
 										type="button"
 										className="text-xs underline text-left opacity-80"
-										onClick={() => navigator(ROUTES.resetPassword)}>
+										onClick={() => navigator('/' + ROUTES.resetPassword)}>
 										點此進入重設密碼頁面
 									</button>
 								)}
