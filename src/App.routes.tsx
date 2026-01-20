@@ -1,4 +1,4 @@
-import { createHashRouter } from 'react-router-dom';
+import { createHashRouter, redirect } from 'react-router-dom';
 
 import { ROUTES } from './core/constants';
 import NotFound from './pages/errors/NotFound.page';
@@ -12,6 +12,10 @@ export const router = createHashRouter([
 		children: [
 			{
 				path: ROUTES.login,
+				loader: () => redirect(ROUTES.root),
+			},
+			{
+				path: ROUTES.root,
 				HydrateFallback: RouteHydrateFallback,
 				lazy: async () => {
 					const { default: LoginPage } = await import('./pages/login/Login.page');
@@ -26,6 +30,16 @@ export const router = createHashRouter([
 						'./pages/forgot-password/ForgotPassword.page'
 					);
 					return { Component: ForgotPasswordPage };
+				},
+			},
+			{
+				path: ROUTES.resetPassword,
+				HydrateFallback: RouteHydrateFallback,
+				lazy: async () => {
+					const { default: ResetPasswordPage } = await import(
+						'./pages/reset-password/ResetPassword.page'
+					);
+					return { Component: ResetPasswordPage };
 				},
 			},
 			{

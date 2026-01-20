@@ -10,7 +10,7 @@ interface LogoutProps {
 const Logout = ({ isExpanded }: LogoutProps) => {
 	const navigate = useNavigate();
 	const onLogoutClick = () => {
-		navigate(ROUTES.login);
+		navigate(ROUTES.root);
 	};
 
 	return (
