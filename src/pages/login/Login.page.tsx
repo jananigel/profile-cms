@@ -138,7 +138,10 @@ const LoginPage = () => {
 								isLoading={isLogging}></TextButton>
 							<div className="text-center">
 								<span className="text-sm text-slate-500">還沒有帳號？ </span>
-								<button type="button" className="text-sm font-bold text-blue-600 hover:underline">
+								<button
+									type="button"
+									className="text-sm font-bold text-blue-600 hover:underline"
+									onClick={() => navigate(ROUTES.register)}>
 									立即註冊
 								</button>
 							</div>
