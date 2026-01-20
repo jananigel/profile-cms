@@ -6,7 +6,7 @@ interface TextButtonProps {
 	label: string;
 	size?: 'auto' | 'full' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 	btnType?: 'submit' | 'reset' | 'button';
-	btnStyle?: 'primary' | 'secondary' | 'amber';
+	btnStyle?: 'primary' | 'secondary' | 'amber' | 'emerald';
 	callback?: MouseEventHandler<HTMLButtonElement>;
 	isDisabled?: boolean;
 	isLoading?: boolean;
@@ -35,6 +35,7 @@ const TextButton = ({
 			'bg-white text-blue-600 border border-blue-600 hover:bg-blue-700 hover:text-white shadow-blue-200 ',
 		amber:
 			'w-full py-3 text-white rounded-xl font-bold transition-all shadow-lg disabled:opacity-50 bg-amber-500 hover:bg-amber-600 shadow-amber-100',
+		emerald: 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-100 text-white ',
 	} as const;
 
 	const getBtnStyle = (): string => {
