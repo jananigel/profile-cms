@@ -129,7 +129,9 @@ const ForgotPasswordPage = () => {
 							isDisabled={isLoading}
 							btnType="submit"
 							btnStyle={'amber'}></TextButton>
-						<button className="cursor-pointer w-full flex items-center justify-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors mt-4">
+						<button
+							className="cursor-pointer w-full flex items-center justify-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors mt-4"
+							onClick={() => navigator('/')}>
 							<ArrowLeft></ArrowLeft>
 							<span>返回登入</span>
 						</button>
